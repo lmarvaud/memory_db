@@ -13,14 +13,33 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-from typing import Iterable
+from typing import Iterable, Type
 
 from cached_property import cached_property
 from django.core.exceptions import FieldDoesNotExist
 from django.db.models.fields import Field
 
 
-class MemoryMeta:
+class MemoryMetaBase(type):
+    """MemoryMeta metaclass."""
+
+    pk: Field
+    fields: Iterable[Field]
+
+    def __new__(mcs, name, bases, attrs: dict):
+        """Set the primary key field."""
+        new_class: Type[MemoryMetaBase]
+
+        new_class = super(MemoryMetaBase, mcs).__new__(mcs, name, bases, attrs)
+        for field in new_class.fields:
+            if field.primary_key:
+                new_class.pk = field
+                break
+
+        return new_class
+
+
+class MemoryMeta(metaclass=MemoryMetaBase):
     """Subclass of the MemoryModel Meta classes."""
 
     pk: Field
