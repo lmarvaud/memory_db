@@ -1,0 +1,23 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+sudo: false
+python:
+  - '3.5'
+  - '3.6'
+
+branches:
+  only:
+    - master
+    - develop
+    - /^release\/\d+\.\d+(\.\d+)?(-\S*)?$/
+
+# Command to install dependencies
+install:
+  - make init
+
+# Command to run tests
+script:
+  - make yapf
+  - make mypy
+  - make coverage

@@ -1,0 +1,8 @@
+-e .
+coverage
+django-stubs
+flake8
+mypy
+pre-commit
+pytest
+yapf
