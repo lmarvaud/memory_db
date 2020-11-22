@@ -48,10 +48,19 @@ setup(
                   for package in packages},
     classifiers=[
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Operating System :: OS Independent',
+        'Framework :: Django',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 3.0',
+        'Framework :: Django :: 3.1',
+        'Framework :: Django :: 3.1',
     ],
     install_requires=[
-        'Django>3,<4',
+        'Django',
         'cached_property>1,<2',
     ]
 )

@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from unittest import TestCase
 
+import django
 from django.core.checks.messages import Error
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.db.models.fields import IntegerField, PositiveIntegerField
@@ -22,6 +23,11 @@ from django.db.models.fields import IntegerField, PositiveIntegerField
 from memory_db import MemoryMeta, MemoryModel
 from tests.models import TestEmptyManager
 from tests.utils import setup_django
+
+if django.VERSION < (2, 3):
+    expected_error_fmt = "'%s' value must be an integer."
+else:
+    expected_error_fmt = '“%s” value must be an integer.'
 
 
 class TestModel(TestCase):
@@ -85,8 +91,7 @@ class TestModel(TestCase):
         self.assertEqual(result.default, 2)
 
         self.assertRaisesRegex(
-            ValidationError, '“text” value must be an integer.', self.TestModel.from_db,
-            {'value': 'text'}
+            ValidationError, expected_error_fmt % 'text', self.TestModel.from_db, {'value': 'text'}
         )
 
     @setup_django
@@ -105,7 +110,7 @@ class TestModel(TestCase):
                     ),
                     Error(
                         msg='Invalid value',
-                        hint='“text” value must be an integer.',
+                        hint=expected_error_fmt % 'text',
                         obj='column value',
                         id='memory_db.models.E002'
                     ),
@@ -124,7 +129,7 @@ class TestModel(TestCase):
                 result, [
                     Error(
                         msg='Invalid value',
-                        hint='“” value must be an integer.',
+                        hint=expected_error_fmt % '',
                         obj='column id',
                         id='memory_db.models.E002'
                     ),
