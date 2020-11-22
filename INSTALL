@@ -1,0 +1,6 @@
+To install memory_db, make sure you have Python 3.5 or greater installed. Then run
+this command from the command prompt:
+
+    python -m pip install .
+
+For more detailed instructions, see README.md.
