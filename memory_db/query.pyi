@@ -24,7 +24,6 @@ if sys.version_info >= (3, 11):
 else:
     Self = TypeVar("Self", bound='_BaseMemoryQuerySet')
 
-
 _T = TypeVar("_T", bound=MemoryModel, covariant=True)
 _Row = TypeVar("_Row", covariant=True)
 

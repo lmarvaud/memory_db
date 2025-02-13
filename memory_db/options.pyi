@@ -19,7 +19,12 @@ from django.db.models.fields import Field
 
 from memory_db.models import MemoryModel
 
+# isort don't treat this file properly.
+
+
 class MemoryMeta:
+    """MemoryMeta metaclass."""
+
     pk: Field = ...
     fields: Iterable[Field] = ...
     object_name: str = ...

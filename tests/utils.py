@@ -22,8 +22,8 @@ def setup_django(test: Callable):
 
     @wraps(test)
     def wrapper(*args, **kwargs):
-        from django.conf import settings
         from django import setup
+        from django.conf import settings
         if not settings.configured:
             settings.configure()
         setup()
