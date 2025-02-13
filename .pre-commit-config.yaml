@@ -59,7 +59,7 @@ repos:
   hooks:
   - id: bandit
     args:
-    - --skip=B101,B322
+    - --skip=B101
     exclude: (?x)^(.*/test\w*.py)$
 - repo: local
   hooks:
