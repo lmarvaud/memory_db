@@ -13,13 +13,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import sys
 from typing import Any, Callable, Collection, Dict, Generic, Iterable, Iterator, List, Optional, \
     overload, Reversible, Sized, Tuple, Type, TypeVar, Union
 
 from memory_db.models import MemoryModel
 
+if sys.version_info >= (3, 11):
+    from typing import Self
+else:
+    Self = TypeVar("Self", bound='_BaseMemoryQuerySet')
+
+
 _T = TypeVar("_T", bound=MemoryModel, covariant=True)
-_QS = TypeVar("_QS", bound='_BaseMemoryQuerySet')
 _Row = TypeVar("_Row", covariant=True)
 
 GetAllFunction = Callable[[], Iterable[_T]]
@@ -82,19 +88,19 @@ class _BaseMemoryQuerySet(Generic[_T], Sized):
     def ordered(self) -> bool:
         ...
 
-    def order_by(self, *orders: Tuple[str, ...]) -> _QS:
+    def order_by(self: Self, *orders: Tuple[str, ...]) -> Self:
         ...
 
-    def get(self, **filters: Dict[str, Any]) -> _T:
+    def get(self: Self, **filters: Dict[str, Any]) -> _T:
         ...
 
-    def filter(self, **filters: Dict[str, Any]) -> _QS:
+    def filter(self: Self, **filters: Dict[str, Any]) -> Self:
         ...
 
-    def exclude(self, **filters: Dict[str, Any]) -> _QS:
+    def exclude(self: Self, **filters: Dict[str, Any]) -> Self:
         ...
 
-    def all(self) -> _QS:
+    def all(self: Self) -> Self:
         ...
 
 
@@ -111,11 +117,11 @@ class ValuesMemoryQuerySet(_BaseMemoryQuerySet[_T], Collection[_Row], Sized):
         ...
 
     @overload  # type: ignore
-    def __getitem__(self: _QS, i: int) -> _Row:
+    def __getitem__(self: Self, i: int) -> _Row:
         ...
 
     @overload  # type: ignore
-    def __getitem__(self: _QS, s: slice) -> _QS:
+    def __getitem__(self: Self, s: slice) -> Self:
         ...
 
     def iterator(self, chunk_size: int = ...) -> Iterator[_Row]:  # type: ignore
