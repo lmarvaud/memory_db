@@ -131,7 +131,7 @@ class PersonManager(MemoryManager):
         pass
 
     def check_data(self):
-        errors: List[checks.]
+        errors: List[CheckMessage]
         with open('persons.yml', mode='r', encoding='utf8') as stream:
             content = yaml.safe_load(stream)
             for row in content:
