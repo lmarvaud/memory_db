@@ -37,8 +37,11 @@ class MemoryBaseManager(MemoryQuerySet[_Tco], metaclass=abc.ABCMeta):
         ...
 
     @classmethod
-    def from_queryset(cls, queryset_class: Type[MemoryQuerySet[_Tco]],
-                      class_name: Optional[str] = ...) -> Type[Union[MemoryQuerySet[_Tco], 'MemoryBaseManager']]:
+    def from_queryset(
+        cls,
+        queryset_class: Type[MemoryQuerySet[_Tco]],
+        class_name: Optional[str] = ...
+    ) -> Type[Union[MemoryQuerySet[_Tco], 'MemoryBaseManager']]:
         ...
 
 
@@ -47,6 +50,7 @@ class MemoryManager(MemoryBaseManager[_Tco], metaclass=abc.ABCMeta):
 
 
 class MemoryBaseRelatedManager(MemoryBaseManager[_Tco]):
+
     def __init__(self, model: Type[_Tco]):
         ...
 
@@ -61,5 +65,6 @@ class MemoryBaseRelatedManager(MemoryBaseManager[_Tco]):
 
 
 class MemoryRelatedManager(MemoryBaseRelatedManager[_Tco]):
+
     def __init__(self, model: Type[_Tco]):
         ...
