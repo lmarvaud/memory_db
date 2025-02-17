@@ -1,8 +1,8 @@
 -e .
-coverage
 django-stubs
 flake8
 mypy
 pre-commit
 pytest
+pytest-cov
 yapf
