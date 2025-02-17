@@ -2,7 +2,7 @@
 import re
 import sys
 from io import StringIO
-from typing import Generator, Iterable, Iterator
+from typing import Generator, Iterable, Iterator, List
 
 import tox
 import yaml
@@ -42,7 +42,7 @@ class Versions:
         self.django_version = django_version
 
 
-def extract_versions(tox_envs: list[str]) -> Generator[Versions, None, None]:
+def extract_versions(tox_envs: List[str]) -> Generator[Versions, None, None]:
     for env in tox_envs:
         [py_env, django_env] = env.split('-')
         py_match = re.match(r'py(\d)(\d+)', py_env)
