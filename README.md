@@ -1,6 +1,6 @@
 # memory_db
 
-[![Build Status](https://img.shields.io/travis/lmarvaud/memory_db)](https://travis-ci.org/lmarvaud/memory_db)
+[![Build Status](https://img.shields.io/github/checks-status/lmarvaud/memory_db/master)](https://github.com/lmarvaud/memory_db/actions?query=branch%3Amaster)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/lmarvaud/memory_db)](https://codecov.io/gh/lmarvaud/memory_db)
 [![License](https://img.shields.io/github/license/lmarvaud/memory_db)](https://github.com/lmarvaud/memory_db/blob/master/LICENSE)
 [![Repository](https://img.shields.io/badge/github-lmarvaud/memory_db-yellow?logo=github&logoColor=white)](https://github.com/lmarvaud/memory_db)
