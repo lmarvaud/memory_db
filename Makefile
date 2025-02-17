@@ -18,3 +18,9 @@ yapf:
 
 flake8:
 	python -m flake8 .
+
+tox2actions:
+	@tox -l | perl -ne 'print if s/^py(\d)(\d+)-django(\d)(\d+)$$/{"python-version": "\1.\2", "django-version": "\3.\4"}/gs'
+
+.github/workflows/actions.yml: setup.cfg
+	yq '.jobs.build.strategy.matrix.include = [$(shell ${MAKE} tox2actions | paste -s -d,)]' -i $@
