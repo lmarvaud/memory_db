@@ -5,11 +5,10 @@ init:
 	pre-commit install -t pre-commit -t pre-push
 
 test:
-	python -m unittest
+	pytest
 
 coverage:
-	python -m coverage run -m unittest
-	python -m coverage report
+	pytest --cov memory_db --cov-report xml --cov-report term-missing
 
 mypy:
 	python -m mypy .
